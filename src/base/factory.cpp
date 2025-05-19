@@ -101,7 +101,7 @@ Implementation* Factory::create_implementation(std::string ifce_name, const YAML
     const auto& impls_info = ifce_info.impls_info;
 
     const YAML::Node& ifce_config = config[ifce_name];
-    std::string impl_name = ifce_config["impl"].as<std::string>("");
+    std::string impl_name = ifce_config["impl"].template as<std::string>("");
     if (impl_name == "") {
       throw InitializationError("No implementation specified for interface {}!", ifce_name); 
       return nullptr;  

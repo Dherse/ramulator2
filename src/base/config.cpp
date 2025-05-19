@@ -38,7 +38,7 @@ void Config::Details::resolve_included_configs(YAML::Node node) {
     case YAML::NodeType::Scalar: {
       if (node.Tag() == "!include") {
         const fs::path curr_path = fs::current_path();
-        node = load_config_file(node.as<std::string>());
+        node = load_config_file(node.template as<std::string>());
         resolve_included_configs(node);
         fs::current_path(curr_path);
       }

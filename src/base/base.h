@@ -66,7 +66,7 @@ class Implementation {
   public:
     Implementation(const YAML::Node& config, std::string ifce_name, std::string name, std::string desc, Implementation* parent):
     m_config(config), 
-    m_ifce_name(ifce_name), m_name(name), m_desc(desc), m_id(config["id"].as<std::string>("_default_id")), 
+    m_ifce_name(ifce_name), m_name(name), m_desc(desc), m_id(config["id"].template as<std::string>("_default_id")), 
     m_parent(parent), m_params(config) {};
 
     Implementation(const YAML::Node& config, std::string ifce_name, std::string name, std::string desc, std::string id, Implementation* parent):
@@ -217,7 +217,7 @@ class Implementation {
       }
 
       // Check if an implementation is given and matches the desired
-      std::string impl_name = child_config["impl"].as<std::string>("");
+      std::string impl_name = child_config["impl"].template as<std::string>("");
       if (impl_name == "") {
         throw ConfigurationError("No implementation specified for interface {}!", ifce_name);
         return nullptr; 
